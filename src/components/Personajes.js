@@ -4,9 +4,8 @@ import Character from './Character';
 
 const Personajes= ({page}) => {
     const [Personajes, setPersonajes] = useState([]);
-    const [url, setUrl] = useState("https://rickandmortyapi.com/api/character/?page=");
-   
-    setUrl(url + page);
+    let url = "https://rickandmortyapi.com/api/character/?page=";
+    url = url + page;
 
     useEffect(() => {
         axios.get(url).then((response) => {
