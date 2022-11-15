@@ -7,8 +7,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const App = () => {
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
+  const [pages, setPages] = useState(0);
   const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
 
   const onClick = (e) =>{
     if(e.target.name === "fowards"){
@@ -40,6 +41,7 @@ const App = () => {
   return (
     <>
       <h1 className='text-info py-4'>Rick and Morty</h1>
+
       <form>
         <h5>
           Buscar:
@@ -52,8 +54,10 @@ const App = () => {
           />
         </h5>
       </form>
+
       <p/>
-      <Personajes query={query}/>
+      <Personajes query={query} setPages={setPages}/>
+
       <p>
         {page > 1 ? (
           <button onClick={onClick} name = "backwards" className='btn btn-outline-primary'>
@@ -62,15 +66,16 @@ const App = () => {
         ):(
           <></>
         )}
-        {page < 42 ? (
+
+        {page < pages ? (
           <button onClick={onClick} name = "fowards" className='btn btn-outline-primary'>
             Next
           </button>
         ):(
           <></>
         )}
-        
       </p>
+
     </>
   );
 }

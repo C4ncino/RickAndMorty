@@ -2,18 +2,18 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Character from './Character';
 
-const Personajes= ({query}) => {
+const Personajes= ({query, setPages}) => {
     const [Personajes, setPersonajes] = useState([]);
     let url = "https://rickandmortyapi.com/api/character/?";
     url = url + query;
-    console.log(query);
+    // console.log(query);
 
     useEffect(() => {
         axios.get(url).then((response) => {
             setPersonajes (response.data.results);
-            // console.log(Personajes)
+            setPages(response.data.info.pages);
         });
-    }, [query, url]);
+    }, [query, url, setPages]);
 
     return (
         <>
