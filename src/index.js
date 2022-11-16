@@ -55,7 +55,7 @@ const App = () => {
           />
         </div>
 
-        <Characters query={query} setPages={setPages}/>
+        <p/>
 
         <div>
           {page > 1 ? (
@@ -64,7 +64,7 @@ const App = () => {
             </button>
           ):(
             <></>
-          )}
+            )}
 
           {page < pages ? (
             <button onClick={onClick} name = "fowards" className='btn btn-outline-primary'>
@@ -72,8 +72,10 @@ const App = () => {
             </button>
           ):(
             <></>
-          )}
+            )}
         </div>
+        
+        <Characters query={query} setPages={setPages}/>
 
       </div>
     </>

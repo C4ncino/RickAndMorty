@@ -11,7 +11,7 @@ const Character = ({character}) => {
                 />
                 <div className='card-body text-ligth'>
                     <h5 className='card-title'>{character.name}</h5>
-                    <p className='card-text'>{character.status} - {character.species}</p>
+                    <p className='card-text'>{character.species} - {character.status}</p>
                 </div>
             </div>
         </div> 
