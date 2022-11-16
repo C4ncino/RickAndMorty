@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Personajes from './components/Personajes';
+import Characters from './components/Characters';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -40,42 +40,42 @@ const App = () => {
 
   return (
     <>
-      <h1 className='text-info py-4'>Rick and Morty</h1>
+      <div className='container-fluid text-center bg-dark'>
 
-      <form>
-        <h5>
-          Buscar:
+        <h1 className='text-info py-4'>Rick and Morty</h1>
+
+        <div>
           <input
             type = "text" 
             name = "search" 
             id = "search"
+            placeholder="Buscar..."
             value = {search}
             onChange = {onChange} 
           />
-        </h5>
-      </form>
+        </div>
 
-      <p/>
-      <Personajes query={query} setPages={setPages}/>
+        <Characters query={query} setPages={setPages}/>
 
-      <p>
-        {page > 1 ? (
-          <button onClick={onClick} name = "backwards" className='btn btn-outline-primary'>
-            Prev
-          </button>
-        ):(
-          <></>
-        )}
+        <div>
+          {page > 1 ? (
+            <button onClick={onClick} name = "backwards" className='btn btn-outline-primary'>
+              Prev
+            </button>
+          ):(
+            <></>
+          )}
 
-        {page < pages ? (
-          <button onClick={onClick} name = "fowards" className='btn btn-outline-primary'>
-            Next
-          </button>
-        ):(
-          <></>
-        )}
-      </p>
+          {page < pages ? (
+            <button onClick={onClick} name = "fowards" className='btn btn-outline-primary'>
+              Next
+            </button>
+          ):(
+            <></>
+          )}
+        </div>
 
+      </div>
     </>
   );
 }

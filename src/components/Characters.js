@@ -2,25 +2,26 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Character from './Character';
 
-const Personajes= ({query, setPages}) => {
-    const [Personajes, setPersonajes] = useState([]);
+const Characters = ({query, setPages}) => {
+    const [characters, setCharacters] = useState([]);
+
     let url = "https://rickandmortyapi.com/api/character/?";
     url = url + query;
-    // console.log(query);
 
     useEffect(() => {
         axios.get(url).then((response) => {
-            setPersonajes (response.data.results);
+            setCharacters (response.data.results);
             setPages(response.data.info.pages);
         });
     }, [query, url, setPages]);
 
     return (
         <>
+            <p/>
             <div className='container'>
                 <div className='row'>
-                    {Personajes.map( (personaje) => 
-                        <Character key = {personaje.id} personaje = {personaje} />
+                    {characters.map( (character) => 
+                        <Character key = {character.id} character = {character} />
                     )}
                 </div>
             </div>
@@ -28,4 +29,4 @@ const Personajes= ({query, setPages}) => {
     );
 }
 
-export default Personajes;
+export default Characters;
