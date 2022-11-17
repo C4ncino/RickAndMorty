@@ -27,26 +27,26 @@ const App = () => {
 
     return (
         <>
-        <div className='container-fluid text-center bg-dark'>
+        <div className='container-fluid text-center bg-ligth'>
 
             <h1 className='text-info py-4'>Rick and Morty</h1>
 
             <div>
-            <input
-                type = "text" 
-                name = "search" 
-                id = "search"
-                placeholder="Buscar..."
-                value = {search}
-                onChange = {onChange} 
-            />
+                <input
+                    type = "text" 
+                    name = "search" 
+                    id = "search"
+                    placeholder="Buscar..."
+                    value = {search}
+                    onChange = {onChange} 
+                />
             </div>
 
             <p/>
 
             <div>
                 {page > 1 ? (
-                    <button id='bacwards' onClick={()=>{setPage(page-1)}} className='btn btn-outline-primary'>
+                    <button id='bacwards' onClick={()=>{setPage(page - 1)}} className='btn btn-outline-primary'>
                         Prev
                     </button>
                 ):(
@@ -54,7 +54,7 @@ const App = () => {
                     )}
 
                 {page < pages ? (
-                    <button id='fowards' onClick={()=>{setPage(page-1)}} className='btn btn-outline-primary'>
+                    <button id='fowards' onClick={()=>{setPage(page + 1)}} className='btn btn-outline-primary'>
                         Next
                     </button>
                 ):(
