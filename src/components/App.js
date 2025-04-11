@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import Characters from './Characters';
 
 const App = () => {
@@ -8,65 +8,52 @@ const App = () => {
     const [query, setQuery] = useState("");
 
     const onChange = (e) => {
-        if (e.target.name === "search"){
-            setSearch(e.target.value);
-            if(page !== 1){
-                setPage(1);
-            }
-        }
+        setSearch(e.target.value);
+
+        if (page !== 1) setPage(1);
     };
 
     useEffect(() => {
-        if(search){
+        if (search) {
             setQuery("page=" + page + "&name=" + search);
         }
-        else{
+        else {
             setQuery("page=" + page);
         }
     }, [page, search]);
 
     return (
-        <>
-        <div className='container-fluid text-center bg-ligth'>
+        <main className='container-fluid bg-light'>
 
-            <h1 className='text-info py-4'>Rick and Morty</h1>
+            <h1 className='text-info py-4 text-center'>Rick and Morty</h1>
 
-            <div>
+            <form className='input-group justify-content-center'>
                 <input
-                    type = "text" 
-                    name = "search" 
-                    id = "search"
+                    className='input-group-text text-start'
+                    type="text"
+                    name="search"
+                    id="search"
                     placeholder="Buscar..."
-                    value = {search}
-                    onChange = {onChange} 
+                    value={search}
+                    onChange={onChange}
                 />
-            </div>
+            </form>
 
-            <p/>
+            <menu className='d-flex flex-row justify-content-center align-items-center p-0 gap-3'>
+                <button id='backwards' disabled={page === 1} onClick={() => { setPage(page - 1) }} className='btn btn-outline-primary border-0'>
+                    &lt; Prev
+                </button>
 
-            <div>
-                {page > 1 ? (
-                    <button id='bacwards' onClick={()=>{setPage(page - 1)}} className='btn btn-outline-primary'>
-                        Prev
-                    </button>
-                ):(
-                    <></>
-                    )}
+                <p className='mb-0'>Page {page} of {pages}</p>
 
-                {page < pages ? (
-                    <button id='fowards' onClick={()=>{setPage(page + 1)}} className='btn btn-outline-primary'>
-                        Next
-                    </button>
-                ):(
-                    <></>
-                )}
-            </div>
-            
-            <Characters query={query} setPages={setPages}/>
+                <button id='forwards' disabled={page === pages} onClick={() => { setPage(page + 1) }} className='btn btn-outline-primary border-0'>
+                    Next &gt;
+                </button>
+            </menu>
 
-        </div>
-        </>
+            <Characters {...{ query, setPages }} />
+        </main>
     );
 }
- 
+
 export default App;
