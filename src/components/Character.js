@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query'
+
 
 const Character = ({ character }) => {
     const statusColors = {
@@ -8,13 +9,14 @@ const Character = ({ character }) => {
         "unknown": "bg-secondary"
     }
 
-    const [firstEpisode, setFirstEpisode] = useState("");
+    const { data: firstEpisode } = useQuery({
+        queryKey: ['getFirstEpisode'],
+        queryFn: async () => {
+            const response = await axios.get(character.episode[0]);
 
-    useEffect(() => {
-        axios.get(character.episode[0]).then((response) => {
-            setFirstEpisode(response.data.name);
-        });
-    }, [character]);
+            return response.data.name;
+        },
+    })
 
 
     return (

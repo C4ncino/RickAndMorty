@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query'
+
 import Character from './Character';
 
 const Characters = ({ query, setPages }) => {
-    const [characters, setCharacters] = useState([]);
-
     let url = "https://rickandmortyapi.com/api/character/?";
     url = url + query;
 
-    useEffect(() => {
-        axios.get(url).then((response) => {
-            setCharacters(response.data.results);
+    const { isPending, data: characters } = useQuery({
+        queryKey: ['getCharacters', url],
+        queryFn: async () => {
+            const response = await axios.get(url);
+
             setPages(response.data.info.pages);
-        });
-    }, [query, url, setPages]);
+
+            return response.data.results;
+        },
+    })
+
+    if (isPending) return (
+        <h2 className="text-center">Loading...</h2>
+    )
 
     return (
         <article className='container'>
